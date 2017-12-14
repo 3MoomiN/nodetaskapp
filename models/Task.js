@@ -7,7 +7,7 @@ getTaskById: function(id, callback) {
 return db.query("select * from task where Id=?", [id], callback);  
 },  
 addTask: function(Task, callback) {  
-return db.query("Insert into task values(?,?,?)", [Task.Id, Task.Title, Task.Status], callback);  
+return db.query("Insert into task (`Id`, `Title`, `Status`) values(NULL,?,?)", [Task.Title, Task.Status], callback);  
 },  
 deleteTask: function(id, callback) {  
 return db.query("delete from task where Id=?", [id], callback);  

@@ -1,4 +1,4 @@
-var express = require('express');
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,7 +8,16 @@ var cors=require('cors');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var Tasks=require('./routes/Tasks');
+
+var express = require('express');
 var app = express();
+
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator()); 
+app.use(cookieParser());
 
 // view engine setup
 app.set('views', './views');
@@ -29,6 +38,7 @@ app.use('/Tasks',Tasks);
 //LISÄTTY 
 app.use('/node_modules', express.static(__dirname + '/node_modules')); 
 app.use('/style', express.static(__dirname + '/style'));
+app.use(cors()); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

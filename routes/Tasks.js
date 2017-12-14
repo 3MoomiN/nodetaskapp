@@ -1,6 +1,10 @@
-var express = require('express');  
+/*var express = require('express');
+var app = express();
 var router = express.Router();  
-var Task = require('../models/Task');  
+var Task = require('../models/Task');
+var task_controller = require('../controllers/taskController'); 
+router.get('/Tasks', task_controller.task_list)
+router.get('/:id', task_controller.task_details); ;     
 router.get('/:id?', function(req, res, next) {  
 if (req.params.id) {  
 Task.getTaskById(req.params.id, function(err, rows) {  
@@ -50,4 +54,27 @@ res.json(rows);
 }  
 });  
 });  
+module.exports = router;*/
+
+var express = require('express');  
+var router = express.Router();  
+
+var Task = require('../models/Task');  
+var task_controller = require('../controllers/taskController'); 
+
+
+router.get('/Tasks', task_controller.task_list);     
+router.get('/Addtask', task_controller.task_create_get); 
+router.post('/Addtask', task_controller.task_create_post);     
+router.get('/:id', task_controller.task_details); 
+router.get('/deletetask/:id', task_controller.task_delete_get);     
+
 module.exports = router;
+
+
+
+
+
+
+
+
